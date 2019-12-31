@@ -1,2 +1,2 @@
 # lokinSai-git-projects
-Projects on Machine Learning, Kubernetes and Docker
+The git repository majorly consists of implementation of machine learning algorithms and academic projects written in python. In addition, one of the academic projects about failure prediction in production lines was implemented in R. Apart from machine learning, I have also implemented a nueral network on kubernetes with the help google cloud platform to perform style transfer on images. The kubernetes and docker technologies were used to implement automatic license plate recognition system hosting on google cloud platform.
