@@ -1,0 +1,129 @@
+
+"Logistic vs PCA"
+
+> traindata<-cbind(train_numeric_S0[1:14])
+> traindata<-na.omit(traindata)
+> summary(traindata)
+       Id             Response           L0_S0_F0            L0_S0_F2             L0_S0_F4            L0_S0_F6        
+ Min.   :     31   Min.   :0.000000   Min.   :-3.95e-01   Min.   :-0.4220000   Min.   :-0.397000   Min.   :-0.397000  
+ 1st Qu.: 581199   1st Qu.:0.000000   1st Qu.:-4.90e-02   1st Qu.:-0.0560000   1st Qu.:-0.179000   1st Qu.:-0.179000  
+ Median :1173883   Median :0.000000   Median : 3.00e-03   Median : 0.0040000   Median :-0.033000   Median :-0.034000  
+ Mean   :1176947   Mean   :0.005492   Mean   : 7.42e-05   Mean   :-0.0001105   Mean   : 0.001357   Mean   : 0.001324  
+ 3rd Qu.:1768551   3rd Qu.:0.000000   3rd Qu.: 5.60e-02   3rd Qu.: 0.0630000   3rd Qu.: 0.294000   3rd Qu.: 0.294000  
+ Max.   :2367472   Max.   :1.000000   Max.   : 2.65e-01   Max.   : 0.2800000   Max.   : 0.567000   Max.   : 0.566000  
+    L0_S0_F8            L0_S0_F10           L0_S0_F12            L0_S0_F14            L0_S0_F16         
+ Min.   :-0.4040000   Min.   :-0.566000   Min.   :-4.400e-02   Min.   :-0.2320000   Min.   :-0.4340000  
+ 1st Qu.:-0.0560000   1st Qu.:-0.066000   1st Qu.:-1.500e-02   1st Qu.:-0.0720000   1st Qu.:-0.0820000  
+ Median : 0.0310000   Median : 0.070000   Median : 0.000e+00   Median :-0.0320000   Median : 0.0000000  
+ Mean   :-0.0009614   Mean   :-0.001886   Mean   :-1.574e-05   Mean   :-0.0001135   Mean   :-0.0001608  
+ 3rd Qu.: 0.0310000   3rd Qu.: 0.116000   3rd Qu.: 1.500e-02   3rd Qu.: 0.0880000   3rd Qu.: 0.0760000  
+ Max.   : 0.3350000   Max.   : 0.206000   Max.   : 1.110e-01   Max.   : 0.5280000   Max.   : 0.4840000  
+   L0_S0_F18           L0_S0_F20           L0_S0_F22        
+ Min.   :-0.393000   Min.   :-0.341000   Min.   :-0.341000  
+ 1st Qu.:-0.078000   1st Qu.:-0.178000   1st Qu.:-0.178000  
+ Median : 0.002000   Median :-0.010000   Median :-0.010000  
+ Mean   :-0.000099   Mean   :-0.003159   Mean   :-0.003144  
+ 3rd Qu.: 0.077000   3rd Qu.: 0.162000   3rd Qu.: 0.162000  
+ Max.   : 0.537000   Max.   : 0.655000   Max.   : 0.655000  
+> pca3<-princomp(traindata,scores=TRUE,cor=TRUE)
+> summary(pca3)
+Importance of components:
+                          Comp.1    Comp.2    Comp.3    Comp.4     Comp.5     Comp.6     Comp.7    Comp.8     Comp.9
+Standard deviation     1.9841049 1.4829727 1.4064075 1.2744135 1.06910498 1.00007290 0.99900953 0.6587102 0.63427938
+Proportion of Variance 0.2811909 0.1570863 0.1412844 0.1160093 0.08164182 0.07143899 0.07128715 0.0309928 0.02873645
+Cumulative Proportion  0.2811909 0.4382771 0.5795616 0.6955708 0.77721266 0.84865164 0.91993879 0.9509316 0.97966804
+                         Comp.10     Comp.11     Comp.12      Comp.13      Comp.14
+Standard deviation     0.4030635 0.320194925 0.118823165 0.0744536637 4.880302e-04
+Proportion of Variance 0.0116043 0.007323199 0.001008496 0.0003959534 1.701239e-08
+Cumulative Proportion  0.9912723 0.998595534 0.999604030 0.9999999830 1.000000e+00
+> loadings(pca3)
+
+Loadings:
+          Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 Comp.7 Comp.8 Comp.9 Comp.10 Comp.11 Comp.12 Comp.13 Comp.14
+Id                                            0.808 -0.589                                                      
+Response                                     -0.588 -0.807                                                      
+L0_S0_F0   0.394  0.236        -0.308  0.195                      -0.140 -0.492   0.420  -0.418   0.205         
+L0_S0_F2   0.399  0.253        -0.275  0.169                       0.182  0.520   0.386   0.417  -0.202         
+L0_S0_F4  -0.287  0.473        -0.293  0.159                                     -0.285   0.310   0.635         
+L0_S0_F6  -0.288  0.472        -0.294  0.159                                     -0.280  -0.308  -0.638         
+L0_S0_F8                 0.302  0.419  0.537               -0.655                                               
+L0_S0_F10         0.216  0.346  0.436  0.327                0.724                                               
+L0_S0_F12 -0.476                                                   0.142  0.455   0.484  -0.482   0.234         
+L0_S0_F14 -0.481                                                  -0.128 -0.432   0.522   0.478  -0.229         
+L0_S0_F16         0.332  0.319  0.124 -0.515               -0.174  0.650 -0.209                                 
+L0_S0_F18  0.108  0.335  0.340  0.150 -0.457                      -0.695  0.205                                 
+L0_S0_F20  0.145  0.271 -0.530  0.350                                                                    -0.707 
+L0_S0_F22  0.145  0.271 -0.530  0.350                                                                     0.707 
+
+               Comp.1 Comp.2 Comp.3 Comp.4 Comp.5 Comp.6 Comp.7 Comp.8 Comp.9 Comp.10 Comp.11 Comp.12 Comp.13 Comp.14
+SS loadings     1.000  1.000  1.000  1.000  1.000  1.000  1.000  1.000  1.000   1.000   1.000   1.000   1.000   1.000
+Proportion Var  0.071  0.071  0.071  0.071  0.071  0.071  0.071  0.071  0.071   0.071   0.071   0.071   0.071   0.071
+Cumulative Var  0.071  0.143  0.214  0.286  0.357  0.429  0.500  0.571  0.643   0.714   0.786   0.857   0.929   1.000
+> traindta_comp1<-traindata
+> traindta_comp1$L0_S0_F8=NULL
+> traindta_comp1$L0_S0_F10=NULL
+> traindta_comp1$L0_S0_F16=NULL
+> model3<-glm(Response~.,family=binomial(link=logit),data=traindta_comp1)
+> summary(model3)
+
+Call:
+glm(formula = Response ~ ., family = binomial(link = logit), 
+    data = traindta_comp1)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.1832  -0.1155  -0.1053  -0.0902   3.5054  
+
+Coefficients:
+              Estimate Std. Error z value Pr(>|z|)    
+(Intercept) -5.227e+00  1.480e-01 -35.311   <2e-16 ***
+Id          -2.635e-08  1.079e-07  -0.244    0.807    
+L0_S0_F0     1.738e+00  4.555e+00   0.382    0.703    
+L0_S0_F2    -1.289e+00  3.898e+00  -0.331    0.741    
+L0_S0_F4     1.959e+00  3.115e+00   0.629    0.530    
+L0_S0_F6    -3.547e+00  3.127e+00  -1.134    0.257    
+L0_S0_F12    1.265e+01  2.138e+01   0.592    0.554    
+L0_S0_F14   -1.475e+00  3.949e+00  -0.374    0.709    
+L0_S0_F18   -9.663e-01  6.731e-01  -1.436    0.151    
+L0_S0_F20   -5.163e+02  4.383e+02  -1.178    0.239    
+L0_S0_F22    5.164e+02  4.384e+02   1.178    0.239    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2294.6  on 33681  degrees of freedom
+Residual deviance: 2275.9  on 33671  degrees of freedom
+AIC: 2297.9
+
+Number of Fisher Scoring iterations: 8
+
+> model4<-glm(Response~L0_S0_F18+L0_S0_F6+L0_S0_F20+L0_S0_F22,family=binomial(link=logit),data=traindta_comp1)
+> summary(model4)
+
+Call:
+glm(formula = Response ~ L0_S0_F18 + L0_S0_F6 + L0_S0_F20 + L0_S0_F22, 
+    family = binomial(link = logit), data = traindta_comp1)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-0.1836  -0.1153  -0.1059  -0.0891   3.4616  
+
+Coefficients:
+              Estimate Std. Error z value Pr(>|z|)    
+(Intercept)   -5.25470    0.07812 -67.260  < 2e-16 ***
+L0_S0_F18     -1.07186    0.65487  -1.637 0.101684    
+L0_S0_F6      -1.35364    0.39014  -3.470 0.000521 ***
+L0_S0_F20   -518.66119  438.43843  -1.183 0.236820    
+L0_S0_F22    518.70389  438.49484   1.183 0.236841    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 2294.6  on 33681  degrees of freedom
+Residual deviance: 2277.1  on 33677  degrees of freedom
+AIC: 2287.1
+
+Number of Fisher Scoring iterations: 8
+

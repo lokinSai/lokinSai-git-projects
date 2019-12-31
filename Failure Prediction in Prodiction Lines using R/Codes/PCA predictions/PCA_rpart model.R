@@ -1,0 +1,60 @@
+library(rpart)
+model_rpart<-rpart(Response~ 
+                     PC1 +
+                     PC2 +
+                     PC3 +
+                     PC4 +
+                     PC5 +
+                     PC6 +
+                     PC7 +
+                     PC8 +
+                     PC9 +
+                     PC10+
+                     PC11+
+                     PC12+
+                     PC13+
+                     PC14+
+                     PC15+
+                     PC16+
+                     PC17+
+                     PC18+
+                     PC19+
+                     PC20+
+                     PC21+
+                     PC22+
+                     PC23+
+                     PC24+
+                     PC25+
+                     PC26+
+                     PC27+
+                     PC28+
+                     PC29+
+                     PC30+
+                     PC31+
+                     PC32+
+                     PC33+
+                     PC34+
+                     PC35+
+                     PC36+
+                     PC37+
+                     PC38+
+                     PC39+
+                     PC40+
+                     PC41+
+                     PC42+
+                     PC43+
+                     PC44+
+                     PC45+
+                     PC46+
+                     PC47+
+                     PC48+
+                     PC49+
+                     PC50,data=train.final2,method="class")
+
+summary(model_rpart)
+pred_rpart<-predict(model_rpart,data=test.final2,type="prob")
+plot(pred_rpart[,2]) 
+summary(pred_rpart[,2])
+
+pred_new_rpart<-ifelse(pred_rpart[,2]>0.6749,1,0)
+confusionMatrix(test.final2$Response,pred_new_rpart)
