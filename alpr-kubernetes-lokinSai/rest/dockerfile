@@ -1,0 +1,4 @@
+FROM ubuntu:18.04
+COPY . /rest-install
+CMD ["/rest-install/rest-install1.sh"]
+
